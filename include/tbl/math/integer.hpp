@@ -30,14 +30,15 @@ struct basic_unsigned_integer {
 
    using larger_uint = typename next_largest<TYPE>::type;
    static constexpr size_t binary_digits = std::numeric_limits<TYPE>::digits;
+   static constexpr TYPE limb_mask = std::numeric_limits<TYPE>::max();
 
    basic_unsigned_integer() = default;
    basic_unsigned_integer(uintmax_t seed)
       : mantissa{}
    {
       for (size_t i = 0; i < size && 0 != seed; ++i) {
-         mantissa[i] = seed & std::numeric_limits<TYPE>::max();
-         seed >>= std::numeric_limits<TYPE>::digits;
+         mantissa[i] = seed & limb_mask;
+         seed >>= binary_digits;
       }
    }
    basic_unsigned_integer(const std::string& seed)
@@ -160,13 +161,13 @@ struct basic_unsigned_integer {
 private:
    TYPE multiply_at_index(size_t index, larger_uint value) {
       larger_uint result = value * mantissa[index];
-      mantissa[index] = result & std::numeric_limits<TYPE>::max();
-      return result >> std::numeric_limits<TYPE>::digits;
+      mantissa[index] = result & limb_mask;
+      return result >> binary_digits;
    }
    TYPE add_at_index(size_t index, larger_uint value) {
       larger_uint result = value + mantissa[index];
-      mantissa[index] = result & std::numeric_limits<TYPE>::max();
-      return result >> std::numeric_limits<TYPE>::digits;
+      mantissa[index] = result & limb_mask;
+      return result >> binary_digits;
    }
 public:
    std::array<TYPE, size> mantissa;
