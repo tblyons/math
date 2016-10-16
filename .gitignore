@@ -33,3 +33,6 @@ tbl-test
 
 # Build directory
 build/
+
+# Vim temporary files
+*.swp
