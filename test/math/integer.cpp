@@ -6,7 +6,7 @@ TEST_CASE("tbl::math::basic_unsigned_integer::basic_unsigned_integer()") {
    using uint24_t = tbl::uint24_t;
    uint24_t a; // uninitialized
    uint24_t b; // uninitialized
-   uint24_t c(4);
+   uint24_t c(4UL);
    uint24_t d(c);
    uint24_t e(a);
    CHECK((a == b) != (a != b)); // Their values are uninitialized, so may or may not equal, but not both
@@ -20,10 +20,10 @@ TEST_CASE("tbl::math::basic_unsigned_integer::basic_unsigned_integer()") {
 
 TEST_CASE("tbl::math::basic_unsigned_integer::operator+=") {
    using uint24_t = tbl::uint24_t;
-   uint24_t a(24);
-   uint24_t b(24);
+   uint24_t a(24UL);
+   uint24_t b(24UL);
    a += b;
-   uint24_t c(48);
+   uint24_t c(48UL);
    CHECK(a == c);
 }
 
@@ -31,7 +31,7 @@ TEST_CASE("tbl::math::basic_unsigned_integer::performance::for_loop") {
    using uint24_t = tbl::uint24_t;
    using namespace std::chrono_literals;
    auto start = std::chrono::high_resolution_clock::now();
-   for (uint24_t i = 0; i < 10000000; ++i) { static_cast<void>(i); }
+   for (uint24_t i = 0UL; i < 10000000UL; ++i) { static_cast<void>(i); }
    auto finish = std::chrono::high_resolution_clock::now();
    CHECK(finish - start < 15us);
 }

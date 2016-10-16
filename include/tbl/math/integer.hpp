@@ -33,6 +33,7 @@ struct basic_unsigned_integer {
    static constexpr TYPE limb_mask = std::numeric_limits<TYPE>::max();
 
    basic_unsigned_integer() = default;
+   basic_unsigned_integer(intmax_t seed) = delete;
    basic_unsigned_integer(uintmax_t seed)
       : mantissa{}
    {
