@@ -2,7 +2,7 @@ CXX := clang++
 TARGET := tbl-test
 OBJECTS = $(SOURCES:%.cpp=$(BLDDIR)/%.o)
 DEPS = $(OBJECTS:.o=.d)
-INCLUDES := -I include -I deps/doctest
+INCLUDES := -I . -I deps/doctest
 SOURCES := \
            test/math/integer.cpp \
 
