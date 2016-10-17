@@ -73,9 +73,16 @@ struct basic_unsigned_integer {
       if (0 != carry) std::cerr << __LINE__ << ": carry: " << carry << std::endl;
       return *this;
    }
-   basic_unsigned_integer& operator-=(const basic_unsigned_integer& /*other*/) {
-      // TODO(tblyons): implement operator-=()
-      throw std::bad_function_call();
+   basic_unsigned_integer& operator-=(const basic_unsigned_integer& other) {
+      TYPE carry = 0;
+      for (size_t i = 0; i < size; ++i) {
+         TYPE temp = mantissa[i];
+         bool underflow = (temp < carry);
+         temp -= carry;
+         underflow |= (temp < other.mantissa[i]);
+         mantissa[i] = temp - other.mantissa[i];
+         carry = static_cast<TYPE>(underflow);
+      }
       return *this;
    }
    basic_unsigned_integer& operator*=(TYPE other) {

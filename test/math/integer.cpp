@@ -20,11 +20,16 @@ TEST_CASE("tbl::math::basic_unsigned_integer::basic_unsigned_integer()") {
 
 TEST_CASE("tbl::math::basic_unsigned_integer::operator+=") {
    using uint24_t = tbl::uint24_t;
-   uint24_t a(24UL);
-   uint24_t b(24UL);
-   a += b;
-   uint24_t c(48UL);
-   CHECK(a == c);
+   uint24_t a(16UL);
+   uint24_t b(a);
+   for (size_t i = 0; i < 1'000'000; ++i) {
+      a += b;
+   }
+   CHECK(a != b);
+   for (size_t i = 0; i < 1'000'000; ++i) {
+      a -= b;
+   }
+   CHECK(a == b);
 }
 
 TEST_CASE("tbl::math::basic_unsigned_integer::performance::for_loop") {
