@@ -19,7 +19,7 @@ struct next_largest { };
 template <> struct next_largest<uint8_t> { using type = uint16_t; };
 template <> struct next_largest<uint16_t> { using type = uint32_t; };
 template <> struct next_largest<uint32_t> { using type = uint64_t; };
-#ifdef __GNUC__
+#if 0
 template <> struct next_largest<uint64_t> { using type = unsigned __int128; };
 #endif
 
@@ -152,19 +152,26 @@ struct basic_unsigned_integer {
       return std::equal(mantissa.begin(), mantissa.end(), other.mantissa.begin());
    }
    bool operator!=(const basic_unsigned_integer& other) const {
-      return std::equal(mantissa.begin(), mantissa.end(), other.mantissa.begin(), std::not_equal_to<TYPE>());
+      return !operator==(other);
    }
    bool operator<=(const basic_unsigned_integer& other) const {
-      return std::equal(mantissa.begin(), mantissa.end(), other.mantissa.begin(), std::less_equal<TYPE>());
+      return !operator>(other);
    }
    bool operator>=(const basic_unsigned_integer& other) const {
-      return std::equal(mantissa.begin(), mantissa.end(), other.mantissa.begin(), std::greater_equal<TYPE>());
+      return !operator<(other);
    }
    bool operator<(const basic_unsigned_integer& other) const {
-      return std::equal(mantissa.begin(), mantissa.end(), other.mantissa.begin(), std::less<TYPE>());
+      return std::lexicographical_compare(mantissa.crbegin(),
+                                          mantissa.crend(),
+                                          other.mantissa.crbegin(),
+                                          other.mantissa.crend());
    }
    bool operator>(const basic_unsigned_integer& other) const {
-      return std::equal(mantissa.begin(), mantissa.end(), other.mantissa.begin(), std::greater<TYPE>());
+      return std::lexicographical_compare(mantissa.crbegin(),
+                                          mantissa.crend(),
+                                          other.mantissa.crbegin(),
+                                          other.mantissa.crend(),
+                                          std::greater<TYPE>());
    }
 private:
    TYPE multiply_at_index(size_t index, larger_uint value) {
@@ -197,7 +204,7 @@ using uint40_t = math::basic_unsigned_integer<uint8_t, 5>;
 using uint48_t = math::basic_unsigned_integer<uint16_t, 3>;
 using uint56_t = math::basic_unsigned_integer<uint8_t, 7>;
 using uint96_t = math::basic_unsigned_integer<uint32_t, 3>;
-#ifdef __GNUC__
+#if 0
 using uint128_t = math::basic_unsigned_integer<uint64_t, 2>;
 using uint256_t = math::basic_unsigned_integer<uint64_t, 4>;
 using uint512_t = math::basic_unsigned_integer<uint64_t, 8>;

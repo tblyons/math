@@ -35,10 +35,39 @@ TEST_CASE("tbl::math::basic_unsigned_integer::operator+=") {
 TEST_CASE("tbl::math::basic_unsigned_integer::performance::for_loop") {
    using uint24_t = tbl::uint24_t;
    using namespace std::chrono_literals;
+   size_t forloop_limit = 1000;
    auto start = std::chrono::high_resolution_clock::now();
-   for (uint24_t i = 0UL; i < 10000000UL; ++i) { static_cast<void>(i); }
+   for (uint24_t i = 0UL; i < forloop_limit; ++i) { static_cast<void>(i); }
    auto finish = std::chrono::high_resolution_clock::now();
-   CHECK(finish - start < 15us);
+   CHECK(finish - start < 70us);
+   std::cout << static_cast<std::chrono::duration<double, std::micro>>(finish - start).count() << std::endl;
+}
+
+TEST_CASE("tbl::math::basic_unsigned_integer comparisons") {
+   using uint56_t = tbl::uint56_t;
+   size_t a = 0;
+   for (uint56_t i = 0UL; i < 1000UL; ++i) {
+      ++a;
+   }
+   CHECK(uint56_t(a) == uint56_t(1000UL));
+   for (uint56_t i = 0UL; i < 1000UL; i += 10) {
+      for (uint56_t j = i; j < 1000UL; j += 10) {
+         if (i == j) {
+            CHECK(i <= j);
+            CHECK(i >= j);
+            CHECK(!(i != j));
+            CHECK(!(i < j));
+            CHECK(!(i > j));
+         } else {
+            CHECK(i <= j);
+            CHECK(!(i >= j));
+            CHECK(!(i == j));
+            CHECK(i != j);
+            CHECK((i < j));
+            CHECK(j > i);
+         }
+      }
+   }
 }
 
 TEST_CASE("tbl::math::basic_unsigned_integer::operator<<=") {
