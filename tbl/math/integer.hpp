@@ -2,11 +2,10 @@
 #define TBL_INTEGER_HPP
 
 #include <array>
-#include <cmath>
-#include <functional>
-#include <iostream>
-#include <limits>
-#include <ostream>
+#include <functional> // std::equal, std::lexicographical_compare
+#include <iostream> // TODO(tblyons): Remove use of std::cerr
+#include <limits> // std::numeric_limits
+#include <ostream> // insertion operator
 #include <string>
 
 namespace tbl {
