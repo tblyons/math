@@ -5,6 +5,7 @@ DEPS = $(OBJECTS:.o=.d)
 INCLUDES := -I . -I deps/doctest
 SOURCES := \
            test/math/integer.cpp \
+           test/math/stats.cpp \
 
 ifndef CONFIG
    CONFIG=Valgrind
