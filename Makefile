@@ -1,11 +1,13 @@
 CXX := clang++
-TARGET := tbl-test
+TARGET := unittests
 OBJECTS = $(SOURCES:%.cpp=$(BLDDIR)/%.o)
 DEPS = $(OBJECTS:.o=.d)
 INCLUDES := -I . -I deps/doctest
 SOURCES := \
            test/math/integer.cpp \
            test/math/stats.cpp \
+           test/containers/array.cpp \
+           test/containers/array_stack.cpp \
 
 ifndef CONFIG
    CONFIG=Valgrind

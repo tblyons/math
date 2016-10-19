@@ -29,7 +29,7 @@
 *.app
 
 # Test suite
-tbl-test
+unittests
 
 # Build directory
 build/
