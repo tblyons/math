@@ -33,22 +33,27 @@ struct array_stack_t {
       if (m_data.size() < m_size + 1) {
          resize();
       }
-      for (size_t i = m_size; index < i; --i) {
-         m_data[i] = m_data[i - 1];
-      }
+      std::copy_backward(begin() + index, begin() + m_size, begin() + m_size + 1);
       m_data[index] = value;
       m_size += 1;
    }
    // Must return by value as it no longer lives in the backing array
    TYPE remove(size_t index) {
       TYPE result = m_data[index];
-      for (size_t i = index; i < m_size - 1; ++i) {
-         m_data[i] = m_data[i + 1];
-      }
+      std::copy(begin() + index + 1, end(), begin() + index);
       m_size -= 1;
       if (m_size * 4 <= m_data.size()) {
          resize();
       }
+      return result;
+   }
+
+   TYPE* begin() const {
+      return m_data.begin();
+   }
+
+   TYPE* end() const {
+      return m_data.begin() + m_size;
    }
 private:
    void resize() {
