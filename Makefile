@@ -1,56 +1,43 @@
-CXX := clang++
 TARGET := unittests
-OBJECTS = $(SOURCES:%.cpp=$(BLDDIR)/%.o)
-DEPS = $(OBJECTS:.o=.d)
-INCLUDES := -I . -I deps/doctest
+BLDDIR := build
 SOURCES := \
+           test/main.cpp \
            test/math/integer.cpp \
            test/math/stats.cpp \
            test/containers/array.cpp \
            test/containers/array_stack.cpp \
 
-ifndef CONFIG
-   CONFIG=Valgrind
+CPPFLAGS += -c -MP -MMD -Werror -I . -I deps/doctest
+CXXFLAGS += -std=c++14
+OBJECTS = $(SOURCES:%.cpp=$(BLDDIR)/%.o)
+DEPS = $(OBJECTS:.o=.d)
+
+ifeq ($(CXX), clang++)
+   CPPFLAGS += -Weverything -Wno-padded
+   CXXFLAGS += -Wno-c++98-compat-pedantic -stdlib=libc++
+   LFLAGS += -lc++ -lc++abi
 endif
 
-ifeq ($(CONFIG), AddSan)
-   BLDDIR := build/sanitize
-   CFLAGS := -g3 -O0 -fsanitize=address
-   LFLAGS := -g3 -O0 -fsanitize=address
+ifeq ($(CXX), g++)
+   CPPFLAGS += -Wall -Wextra
 endif
-
-ifeq ($(CONFIG), Valgrind)
-   BLDDIR := build/debug
-   CFLAGS := -g3 -O0
-   LFLAGS := -g3 -O0
-endif
-
-ifeq ($(CONFIG), Release)
-   BLDDIR := build/release
-   CFLAGS := -g0 -O3
-   LFLAGS := -g0 -O3
-endif
-
-WARNINGS = -Werror -Weverything -Wno-c++98-compat-pedantic -Wno-padded
-CFLAGS += -c -std=c++14 -stdlib=libc++ -MP -MMD
-LFLAGS += -lc++ -lc++abi
 
 .PHONY: all check clean
 all: $(TARGET)
 
 check: $(TARGET)
-	./$(TARGET)
+	-./$(TARGET)
 
 clean:
 	$(RM) -r build $(TARGET)
 
-$(TARGET): $(OBJECTS) $(BLDDIR)/test/main.o
+$(TARGET): $(OBJECTS)
 	$(CXX) $(LFLAGS) $^ -o $@
 
 $(BLDDIR):
 	mkdir -p $(dir $(OBJECTS))
 
 $(BLDDIR)/%.o: %.cpp | $(BLDDIR)
-	$(CXX) $(CFLAGS) $(WARNINGS) $(INCLUDES) -o $@ $<
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ $<
 
 -include $(DEPS)
