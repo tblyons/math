@@ -2,6 +2,8 @@
 
 #include "doctest/doctest.h"
 
+#include <chrono>
+
 TEST_CASE("tbl::math::basic_unsigned_integer::basic_unsigned_integer()") {
    using uint24_t = tbl::uint24_t;
    uint24_t a; // uninitialized

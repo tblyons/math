@@ -133,8 +133,8 @@ struct basic_unsigned_integer {
          std::fill(mantissa.begin(), mantissa.end(), 0);
          return *this;
       } else if (0 < whole_shifts/* < size*/) {
-         std::copy(mantissa.crbegin() + static_cast<ptrdiff_t>(whole_shifts), mantissa.crend(), mantissa.rbegin());
-         std::fill(mantissa.begin(), mantissa.begin() + static_cast<ptrdiff_t>(whole_shifts), 0);
+         std::copy(mantissa.crbegin() + static_cast<std::ptrdiff_t>(whole_shifts), mantissa.crend(), mantissa.rbegin());
+         std::fill(mantissa.begin(), mantissa.begin() + static_cast<std::ptrdiff_t>(whole_shifts), 0);
       }
       if (0 < limb_shift) {
          TYPE carry = 0;
