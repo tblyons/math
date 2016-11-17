@@ -1,11 +1,11 @@
-#include "tbl/math/integer.hpp"
+#include "math/integer.hpp"
 
 #include "doctest/doctest.h"
 
 #include <chrono>
 
-TEST_CASE("tbl::math::basic_unsigned_integer::basic_unsigned_integer()") {
-   using uint24_t = tbl::uint24_t;
+TEST_CASE("math::basic_unsigned_integer::basic_unsigned_integer()") {
+   using uint24_t = math::uint24_t;
    uint24_t a; // uninitialized
    uint24_t b; // uninitialized
    uint24_t c(4UL);
@@ -15,13 +15,12 @@ TEST_CASE("tbl::math::basic_unsigned_integer::basic_unsigned_integer()") {
    CHECK(c == d);
    CHECK(!(c == b));
    c = a;
-   CHECK(c == b);
    CHECK(!(c == d));
    CHECK(a == e);
 }
 
-TEST_CASE("tbl::math::basic_unsigned_integer::operator+=") {
-   using uint24_t = tbl::uint24_t;
+TEST_CASE("math::basic_unsigned_integer::operator+=") {
+   using uint24_t = math::uint24_t;
    uint24_t a(16UL);
    uint24_t b(a);
    for (size_t i = 0; i < 1'000'000; ++i) {
@@ -34,8 +33,8 @@ TEST_CASE("tbl::math::basic_unsigned_integer::operator+=") {
    CHECK(a == b);
 }
 
-TEST_CASE("tbl::math::basic_unsigned_integer::performance::for_loop") {
-   using uint24_t = tbl::uint24_t;
+TEST_CASE("math::basic_unsigned_integer::performance::for_loop") {
+   using uint24_t = math::uint24_t;
    using namespace std::chrono_literals;
    size_t forloop_limit = 1000;
    auto start = std::chrono::high_resolution_clock::now();
@@ -45,8 +44,8 @@ TEST_CASE("tbl::math::basic_unsigned_integer::performance::for_loop") {
    std::cout << static_cast<std::chrono::duration<double, std::micro>>(finish - start).count() << std::endl;
 }
 
-TEST_CASE("tbl::math::basic_unsigned_integer comparisons") {
-   using uint56_t = tbl::uint56_t;
+TEST_CASE("math::basic_unsigned_integer comparisons") {
+   using uint56_t = math::uint56_t;
    size_t a = 0;
    for (uint56_t i = 0UL; i < 1000UL; ++i) {
       ++a;
@@ -72,8 +71,8 @@ TEST_CASE("tbl::math::basic_unsigned_integer comparisons") {
    }
 }
 
-TEST_CASE("tbl::math::basic_unsigned_integer::operator<<=") {
-   using uint56_t = tbl::uint56_t;
+TEST_CASE("math::basic_unsigned_integer::operator<<=") {
+   using uint56_t = math::uint56_t;
    uint56_t num("320255973501901");
    num <<= 0;
    CHECK(num == uint56_t("320255973501901"));

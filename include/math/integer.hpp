@@ -8,8 +8,6 @@
 #include <ostream> // insertion operator
 #include <string>
 
-namespace tbl {
-
 namespace math {
 
 template <typename TYPE>
@@ -196,8 +194,6 @@ std::ostream& operator<<(std::ostream& out, const basic_unsigned_integer<TYPE, s
    return out;
 }
 
-} // namespace math
-
 using uint24_t = math::basic_unsigned_integer<uint8_t, 3>;
 using uint40_t = math::basic_unsigned_integer<uint8_t, 5>;
 using uint48_t = math::basic_unsigned_integer<uint16_t, 3>;
@@ -213,15 +209,15 @@ using uint256_t = math::basic_unsigned_integer<uint32_t, 8>;
 using uint512_t = math::basic_unsigned_integer<uint32_t, 16>;
 #endif
 
-} // namespace tbl
+} // namespace math
 
-static_assert(sizeof(tbl::uint24_t) == 3, "uint24_t is not 24bits long");
-static_assert(sizeof(tbl::uint40_t) == 5, "uint40_t is not 40bits long");
-static_assert(sizeof(tbl::uint48_t) == 6, "uint48_t is not 48bits long");
-static_assert(sizeof(tbl::uint56_t) == 7, "uint56_t is not 56bits long");
-static_assert(sizeof(tbl::uint96_t) == 12, "uint96_t is not 96bits long");
-static_assert(sizeof(tbl::uint128_t) == 16, "uint128_t is not 128bits long");
-static_assert(sizeof(tbl::uint256_t) == 32, "uint256_t is not 256bits long");
-static_assert(sizeof(tbl::uint512_t) == 64, "uint512_t is not 512bits long");
+static_assert(sizeof(math::uint24_t) == 3, "uint24_t is not 24bits long");
+static_assert(sizeof(math::uint40_t) == 5, "uint40_t is not 40bits long");
+static_assert(sizeof(math::uint48_t) == 6, "uint48_t is not 48bits long");
+static_assert(sizeof(math::uint56_t) == 7, "uint56_t is not 56bits long");
+static_assert(sizeof(math::uint96_t) == 12, "uint96_t is not 96bits long");
+static_assert(sizeof(math::uint128_t) == 16, "uint128_t is not 128bits long");
+static_assert(sizeof(math::uint256_t) == 32, "uint256_t is not 256bits long");
+static_assert(sizeof(math::uint512_t) == 64, "uint512_t is not 512bits long");
 
 #endif // TBL_INTEGER_HPP

@@ -4,10 +4,8 @@ SOURCES := \
            test/main.cpp \
            test/math/integer.cpp \
            test/math/stats.cpp \
-           test/containers/array.cpp \
-           test/containers/array_stack.cpp \
 
-CPPFLAGS += -c -MP -MMD -Werror -I . -I deps/doctest
+CPPFLAGS += -c -MP -MMD -Werror -I include -I 3rdparty/doctest
 CXXFLAGS += -std=c++14
 OBJECTS = $(SOURCES:%.cpp=$(BLDDIR)/%.o)
 DEPS = $(OBJECTS:.o=.d)

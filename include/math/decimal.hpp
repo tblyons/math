@@ -1,8 +1,6 @@
 #ifndef TBL_MATH_DECIMAL_HPP
 #define TBL_MATH_DECIMAL_HPP
 
-namespace tbl {
-
 namespace math {
 
 template <typename mantissa, typename exponent>
@@ -43,7 +41,5 @@ private:
 };
 
 } // namespace math
-
-} // namespace tbl
 
 #endif // TBL_MATH_DECIMAL_HPP
