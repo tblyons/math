@@ -2,6 +2,7 @@ TARGET := unittests
 BLDDIR := build
 SOURCES := \
            test/main.cpp \
+           test/math/fixed_point.cpp \
            test/math/integer.cpp \
            test/math/stats.cpp \
 
