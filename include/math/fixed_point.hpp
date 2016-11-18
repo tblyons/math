@@ -4,6 +4,7 @@
 #include "math/pow10.hpp"
 
 #include <cstdint>
+#include <iosfwd>
 #include <ratio>
 
 namespace math {
@@ -58,6 +59,18 @@ struct fixed_point_t {
 private:
    int64_t m_value;
 }; // struct fixed_point_t
+
+template <typename RATIO>
+std::ostream& operator<<(std::ostream& out, const fixed_point_t<RATIO>& fp) {
+   if /*constexpr*/ (RATIO::den == 1) {
+      return out << fp.whole_number();
+   } else if /*constexpr*/ ((RATIO::den % 10) == 0) {
+      // TODO(tblyons): Set width of fractional component
+      return out << fp.whole_number() << '.' << fp.fraction().m_numerator;
+   } else {
+      return out << fp.whole_number() << ' ' << fp.fraction().m_numerator << '/' << fp.fraction().m_denominator;
+   }
+}
 
 } // namespace math
 

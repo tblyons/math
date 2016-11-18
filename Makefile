@@ -7,7 +7,7 @@ SOURCES := \
            test/math/stats.cpp \
 
 CPPFLAGS += -c -MP -MMD -Werror -I include -I 3rdparty/doctest
-CXXFLAGS += -std=c++14
+CXXFLAGS += -std=c++1z
 OBJECTS = $(SOURCES:%.cpp=$(BLDDIR)/%.o)
 DEPS = $(OBJECTS:.o=.d)
 
