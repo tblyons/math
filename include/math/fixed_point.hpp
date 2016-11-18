@@ -4,20 +4,20 @@
 #include "math/pow10.hpp"
 
 #include <cstdint>
+#include <ratio>
 
 namespace math {
 
-template <uint32_t DECIMAL_PLACES>
+template <typename RATIO>
 struct fixed_point_t {
 
-   static constexpr uint32_t decimal_places = DECIMAL_PLACES;
-   static constexpr uint64_t exponent = pow10(decimal_places);
+   using ratio = RATIO;
 
    constexpr fixed_point_t()
       : m_value() {}
 
    explicit constexpr fixed_point_t(double value)
-      : m_value(static_cast<int64_t>(value * exponent)) {}
+      : m_value((value * ratio::den) / ratio::num) {}
 
    constexpr fixed_point_t& operator+=(const fixed_point_t& other) {
       m_value += other.m_value;
@@ -30,7 +30,7 @@ struct fixed_point_t {
    }
 
    constexpr int64_t whole_number() const {
-      return m_value / exponent;
+      return (m_value * ratio::num) / ratio::den;
    }
 
    int64_t& significand() {
@@ -52,7 +52,7 @@ struct fixed_point_t {
    };
 
    constexpr rational_t fraction() const {
-      return rational_t(m_value % exponent, exponent);
+      return rational_t((m_value * ratio::num) % ratio::den, ratio::den);
    }
 
 private:
