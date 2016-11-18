@@ -1,18 +1,17 @@
 #ifndef MATH_FIXEDPOINT_HPP
 #define MATH_FIXEDPOINT_HPP
 
+#include "math/pow10.hpp"
+
 #include <cstdint>
 
 namespace math {
 
-inline constexpr int64_t pow10(uint32_t exponent) {
-   return (exponent == 0) ? 1 : (10 * pow10(exponent - 1));
-}
-
 template <uint32_t DECIMAL_PLACES>
 struct fixed_point_t {
 
-   static constexpr uint64_t exponent = pow10(DECIMAL_PLACES);
+   static constexpr uint32_t decimal_places = DECIMAL_PLACES;
+   static constexpr uint64_t exponent = pow10(decimal_places);
 
    constexpr fixed_point_t()
       : m_value() {}
@@ -38,8 +37,22 @@ struct fixed_point_t {
       return m_value;
    }
 
-   int64_t significand() const {
+   constexpr int64_t significand() const {
       return m_value;
+   }
+
+   struct rational_t {
+
+      constexpr rational_t(int64_t numerator, uint64_t denominator)
+         : m_numerator(numerator)
+         , m_denominator(denominator) {}
+
+      int64_t m_numerator;
+      uint64_t m_denominator;
+   };
+
+   constexpr rational_t fraction() const {
+      return rational_t(m_value % exponent, exponent);
    }
 
 private:
