@@ -18,7 +18,7 @@ struct fixed_point_t {
       : m_value() {}
 
    explicit constexpr fixed_point_t(double value)
-      : m_value((value * ratio::den) / ratio::num) {}
+      : m_value(static_cast<int64_t>(value * ratio::den) / ratio::num) {}
 
    constexpr fixed_point_t& operator+=(const fixed_point_t& other) {
       m_value += other.m_value;
