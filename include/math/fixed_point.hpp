@@ -1,7 +1,12 @@
+#ifndef MATH_FIXEDPOINT_HPP
+#define MATH_FIXEDPOINT_HPP
+
 #include <cstdint>
 
-inline constexpr uint64_t pow10(uint32_t exponent) {
-   return (exponent == 0) ? 1 : (10ULL * pow10(exponent - 1));
+namespace math {
+
+inline constexpr int64_t pow10(uint32_t exponent) {
+   return (exponent == 0) ? 1 : (10 * pow10(exponent - 1));
 }
 
 template <uint32_t DECIMAL_PLACES>
@@ -12,24 +17,35 @@ struct fixed_point_t {
    constexpr fixed_point_t()
       : m_value() {}
 
-   constexpr fixed_point_t(double value)
-      : m_value(value * exponent) {}
+   explicit constexpr fixed_point_t(double value)
+      : m_value(static_cast<int64_t>(value * exponent)) {}
 
-   fixed_point_t& operator+=(const fixed_point_t& other) {
+   constexpr fixed_point_t& operator+=(const fixed_point_t& other) {
       m_value += other.m_value;
       return *this;
    }
 
-   fixed_point_t& operator-=(const fixed_point_t& other) {
+   constexpr fixed_point_t& operator-=(const fixed_point_t& other) {
       m_value -= other.m_value;
       return *this;
    }
 
-   int64_t whole_number() const {
+   constexpr int64_t whole_number() const {
       return m_value / exponent;
    }
 
+   int64_t& significand() {
+      return m_value;
+   }
+
+   int64_t significand() const {
+      return m_value;
+   }
 
 private:
    int64_t m_value;
 }; // struct fixed_point_t
+
+} // namespace math
+
+#endif // MATH_FIXEDPOINT_HPP
