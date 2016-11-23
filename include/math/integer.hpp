@@ -212,30 +212,32 @@ std::ostream& operator<<(std::ostream& out, const basic_unsigned_integer<TYPE, s
    return out;
 }
 
-using uint24_t = math::basic_unsigned_integer<uint8_t, 3>;
-using uint40_t = math::basic_unsigned_integer<uint8_t, 5>;
-using uint48_t = math::basic_unsigned_integer<uint16_t, 3>;
-using uint56_t = math::basic_unsigned_integer<uint8_t, 7>;
-using uint96_t = math::basic_unsigned_integer<uint32_t, 3>;
+using uint24 = math::basic_unsigned_integer<uint8_t, 3>;
+using uint32 = math::basic_unsigned_integer<uint8_t, 4>;
+using uint40 = math::basic_unsigned_integer<uint8_t, 5>;
+using uint48 = math::basic_unsigned_integer<uint16_t, 3>;
+using uint56 = math::basic_unsigned_integer<uint8_t, 7>;
+using uint96 = math::basic_unsigned_integer<uint32_t, 3>;
 #if 0
-using uint128_t = math::basic_unsigned_integer<uint64_t, 2>;
-using uint256_t = math::basic_unsigned_integer<uint64_t, 4>;
-using uint512_t = math::basic_unsigned_integer<uint64_t, 8>;
+using uint128 = math::basic_unsigned_integer<uint64_t, 2>;
+using uint256 = math::basic_unsigned_integer<uint64_t, 4>;
+using uint512 = math::basic_unsigned_integer<uint64_t, 8>;
 #else
-using uint128_t = math::basic_unsigned_integer<uint32_t, 4>;
-using uint256_t = math::basic_unsigned_integer<uint32_t, 8>;
-using uint512_t = math::basic_unsigned_integer<uint32_t, 16>;
+using uint128 = math::basic_unsigned_integer<uint32_t, 4>;
+using uint256 = math::basic_unsigned_integer<uint32_t, 8>;
+using uint512 = math::basic_unsigned_integer<uint32_t, 16>;
 #endif
 
 } // namespace math
 
-static_assert(sizeof(math::uint24_t) == 3, "uint24_t is not 24bits long");
-static_assert(sizeof(math::uint40_t) == 5, "uint40_t is not 40bits long");
-static_assert(sizeof(math::uint48_t) == 6, "uint48_t is not 48bits long");
-static_assert(sizeof(math::uint56_t) == 7, "uint56_t is not 56bits long");
-static_assert(sizeof(math::uint96_t) == 12, "uint96_t is not 96bits long");
-static_assert(sizeof(math::uint128_t) == 16, "uint128_t is not 128bits long");
-static_assert(sizeof(math::uint256_t) == 32, "uint256_t is not 256bits long");
-static_assert(sizeof(math::uint512_t) == 64, "uint512_t is not 512bits long");
+static_assert(sizeof(math::uint24) == 3, "uint24_t is not 24bits long");
+static_assert(sizeof(math::uint32) == 4, "uint24_t is not 24bits long");
+static_assert(sizeof(math::uint40) == 5, "uint40_t is not 40bits long");
+static_assert(sizeof(math::uint48) == 6, "uint48_t is not 48bits long");
+static_assert(sizeof(math::uint56) == 7, "uint56_t is not 56bits long");
+static_assert(sizeof(math::uint96) == 12, "uint96_t is not 96bits long");
+static_assert(sizeof(math::uint128) == 16, "uint128_t is not 128bits long");
+static_assert(sizeof(math::uint256) == 32, "uint256_t is not 256bits long");
+static_assert(sizeof(math::uint512) == 64, "uint512_t is not 512bits long");
 
 #endif // TBL_INTEGER_HPP

@@ -23,7 +23,7 @@ PERFORMANCE OF THIS SOFTWARE.
 #include <chrono>
 
 TEST_CASE("math::basic_unsigned_integer::basic_unsigned_integer()") {
-   using uint24_t = math::uint24_t;
+   using uint24_t = math::uint24;
    uint24_t a; // uninitialized
    uint24_t b; // uninitialized
    uint24_t c(4UL);
@@ -38,7 +38,7 @@ TEST_CASE("math::basic_unsigned_integer::basic_unsigned_integer()") {
 }
 
 TEST_CASE("math::basic_unsigned_integer::operator+=") {
-   using uint24_t = math::uint24_t;
+   using uint24_t = math::uint24;
    uint24_t a(16UL);
    uint24_t b(a);
    for (size_t i = 0; i < 1'000'000; ++i) {
@@ -52,7 +52,7 @@ TEST_CASE("math::basic_unsigned_integer::operator+=") {
 }
 
 TEST_CASE("math::basic_unsigned_integer::performance::for_loop") {
-   using uint24_t = math::uint24_t;
+   using uint24_t = math::uint24;
    using namespace std::chrono_literals;
    size_t forloop_limit = 1000;
    auto start = std::chrono::high_resolution_clock::now();
@@ -63,7 +63,7 @@ TEST_CASE("math::basic_unsigned_integer::performance::for_loop") {
 }
 
 TEST_CASE("math::basic_unsigned_integer comparisons") {
-   using uint56_t = math::uint56_t;
+   using uint56_t = math::uint56;
    size_t a = 0;
    for (uint56_t i = 0UL; i < 1000UL; ++i) {
       ++a;
@@ -90,7 +90,7 @@ TEST_CASE("math::basic_unsigned_integer comparisons") {
 }
 
 TEST_CASE("math::basic_unsigned_integer::operator<<=") {
-   using uint56_t = math::uint56_t;
+   using uint56_t = math::uint56;
    uint56_t num("320255973501901");
    num <<= 0;
    CHECK(num == uint56_t("320255973501901"));
