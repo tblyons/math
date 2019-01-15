@@ -27,4 +27,6 @@ TEST_CASE("math::stats") {
       accum.include(-i);
       CHECK(accum.mean() < 0.000001);
    }
+   CHECK(accum.minimum() == -99);
+   CHECK(accum.maximum() == 99);
 }
