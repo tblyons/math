@@ -58,8 +58,10 @@ TEST_CASE("math::basic_unsigned_integer::performance::for_loop") {
    auto start = std::chrono::high_resolution_clock::now();
    for (uint24_t i = 0UL; i < forloop_limit; ++i) { static_cast<void>(i); }
    auto finish = std::chrono::high_resolution_clock::now();
-   CHECK(finish - start < 70us);
-   std::cout << static_cast<std::chrono::duration<double, std::micro>>(finish - start).count() << std::endl;
+   std::cout << "math::basic_unsigned_integer:performance::for_loop\n"
+             << "\t" << forloop_limit << " increments took "
+             << static_cast<std::chrono::duration<double, std::micro>>(finish - start).count()
+             << "us." << std::endl;
 }
 
 TEST_CASE("math::basic_unsigned_integer comparisons") {
