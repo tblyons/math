@@ -4,7 +4,7 @@
 #include "doctest/doctest.h"
 
 TEST_CASE("fixed_point_t") {
-   math::fixed_point_t<std::ratio<1, 10000>> fp(10.1234);
+   tybl::math::fixed_point_t<std::ratio<1, 10000>> fp(10.1234);
    CHECK(fp.whole_number() == 10);
    CHECK(fp.fraction().m_numerator == 1234);
    CHECK(fp.fraction().m_denominator == 10000);
@@ -12,8 +12,8 @@ TEST_CASE("fixed_point_t") {
 }
 
 TEST_CASE("fixed_point_t::operator+=()") {
-   math::fixed_point_t<std::ratio<1, 10000>> a(1.2345);
-   math::fixed_point_t<std::ratio<1, 10000>> b(5.4321);
+   tybl::math::fixed_point_t<std::ratio<1, 10000>> a(1.2345);
+   tybl::math::fixed_point_t<std::ratio<1, 10000>> b(5.4321);
    CHECK(a.whole_number() == 1);
    CHECK(a.fraction().m_numerator == 2345);
    CHECK(a.fraction().m_denominator == 10000);

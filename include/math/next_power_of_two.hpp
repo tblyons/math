@@ -2,6 +2,8 @@
 #ifndef TBL_MATH_NEXTPOWEROFTWO_HPP
 #define TBL_MATH_NEXTPOWEROFTWO_HPP
 
+namespace tybl::math
+
 template <typename TYPE>
 TYPE next_power_of_two(TYPE number) {
    TYPE result = number - 1;
@@ -10,5 +12,7 @@ TYPE next_power_of_two(TYPE number) {
    }
    return result + 1;
 }
+
+} // namespace tybl::math
 
 #endif // TBL_MATH_NEXTPOWEROFTWO_HPP

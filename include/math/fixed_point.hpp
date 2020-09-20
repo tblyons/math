@@ -8,7 +8,7 @@
 #include <iosfwd>
 #include <ratio>
 
-namespace math {
+namespace tybl::math {
 
 template <typename RATIO>
 struct fixed_point_t {
@@ -73,6 +73,6 @@ std::ostream& operator<<(std::ostream& out, const fixed_point_t<RATIO>& fp) {
    }
 }
 
-} // namespace math
+} // namespace tybl::math
 
 #endif // MATH_FIXEDPOINT_HPP

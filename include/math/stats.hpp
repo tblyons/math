@@ -4,7 +4,7 @@
 
 #include <limits>
 
-namespace math {
+namespace tybl::math {
 
 struct stats {
 
@@ -52,6 +52,6 @@ private:
    double m_min;
 }; // struct stats
 
-} // namespace math
+} // namespace tybl::math
 
 #endif // TBL_MATH_STATS_HPP

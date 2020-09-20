@@ -4,7 +4,7 @@
 #include "doctest/doctest.h"
 
 TEST_CASE("math::stats") {
-   math::stats accum;
+   tybl::math::stats accum;
    for (long i = 0; i < 100; ++i) {
       accum.include(i);
       accum.include(-i);

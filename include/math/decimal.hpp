@@ -2,7 +2,7 @@
 #ifndef TBL_MATH_DECIMAL_HPP
 #define TBL_MATH_DECIMAL_HPP
 
-namespace math {
+namespace tybl::math {
 
 template <typename mantissa, typename exponent>
 struct decimal_t {
@@ -41,6 +41,6 @@ private:
    exponent m_factor;
 };
 
-} // namespace math
+} // namespace tybl::math
 
 #endif // TBL_MATH_DECIMAL_HPP
