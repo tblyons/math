@@ -5,7 +5,7 @@
 include(CheckCXXCompilerFlag)
 
 add_library(compiler_settings INTERFACE)
-target_compile_features(compiler_settings INTERFACE cxx_std_20)
+target_compile_features(compiler_settings INTERFACE cxx_std_17)
 
 check_cxx_compiler_flag(-Weverything HAS_COMPILER_WARNING_EVERYTHING)
 if (${HAS_COMPILER_WARNING_EVERYTHING})
