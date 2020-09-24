@@ -17,6 +17,7 @@ target_sources(unit_test
     main.cpp
     math/fixed_point.cpp
     math/integer.cpp
+    math/matrix.cpp
     math/stats/distribution.cpp)
 
 add_test(NAME unit_test_t COMMAND unit_test)
