@@ -11,8 +11,8 @@ class distribution {
   std::size_t m_count     { 0UL };
   double m_mean           { 0.0 };
   double m_sum_of_squares { 0.0 };
-  Type m_maximum        { std::numeric_limits<Type>::lowest() };
-  Type m_minimum        { std::numeric_limits<Type>::max() };
+  Type m_maximum          { std::numeric_limits<Type>::lowest() };
+  Type m_minimum          { std::numeric_limits<Type>::max() };
 public:
 
   constexpr auto operator+=(Type x) -> distribution& {
