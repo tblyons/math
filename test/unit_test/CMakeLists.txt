@@ -9,15 +9,19 @@ FetchContent_Declare(doctest
   GIT_TAG        "2.4.0")
 FetchContent_MakeAvailable(doctest)
 
-# Define unittests executable target
-add_executable(unit_test)
-target_link_libraries(unit_test PRIVATE math compiler_settings doctest::doctest)
-target_sources(unit_test
-  PRIVATE
-    main.cpp
-    math/fixed_point.cpp
-    math/integer.cpp
-    math/matrix.cpp
-    math/stats/distribution.cpp)
+# Define unit tests as executable targets
+add_executable(fixed_point_ut math/fixed_point.cpp)
+target_link_libraries(fixed_point_ut PRIVATE math compiler_settings doctest::doctest)
+add_test(NAME fixed_point_t COMMAND fixed_point_ut)
 
-add_test(NAME unit_test_t COMMAND unit_test)
+add_executable(integer_ut math/integer.cpp)
+target_link_libraries(integer_ut PRIVATE math compiler_settings doctest::doctest)
+add_test(NAME integer_t COMMAND integer_ut)
+
+add_executable(matrix_ut math/matrix.cpp)
+target_link_libraries(matrix_ut PRIVATE math compiler_settings doctest::doctest)
+add_test(NAME matrix_t COMMAND matrix_ut)
+
+add_executable(distribution_ut math/stats/distribution.cpp)
+target_link_libraries(distribution_ut PRIVATE math compiler_settings doctest::doctest)
+add_test(NAME distribution_t COMMAND distribution_ut)
