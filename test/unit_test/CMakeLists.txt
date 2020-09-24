@@ -25,3 +25,7 @@ add_test(NAME matrix_t COMMAND matrix_ut)
 add_executable(distribution_ut math/stats/distribution.cpp)
 target_link_libraries(distribution_ut PRIVATE math compiler_settings doctest::doctest)
 add_test(NAME distribution_t COMMAND distribution_ut)
+
+add_executable(vector_ut math/vector.cpp)
+target_link_libraries(vector_ut PRIVATE math compiler_settings doctest::doctest)
+add_test(NAME vector_t COMMAND vector_ut)
