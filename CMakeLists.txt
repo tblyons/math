@@ -26,6 +26,7 @@ target_include_directories(math INTERFACE include)
 target_sources(math
   INTERFACE
     include/math/stats/distribution.hpp
+    include/math/stats/probability.hpp
     include/math/pow10.hpp)
 
 if(IS_ROOT_PROJECT OR BUILD_ALL_TESTS)
